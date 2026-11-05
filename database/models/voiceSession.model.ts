@@ -31,6 +31,7 @@ const VoiceSessionSchema = new Schema<IVoiceSession>(
 
 VoiceSessionSchema.index({
   clerkId: 1,
+  pdfId: 1,
   billingPeriodStart: 1,
 });
 

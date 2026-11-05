@@ -27,7 +27,7 @@ const PdfSegmentSchema = new Schema<IPdfSegment>(
 // Compound indexes (pdfId + segmentIndex/pageNumber) optimize lookups, while a text index (content: "text") enables fast full-text search.
 
 PdfSegmentSchema.index(
-  { pdfId: 1, segmentIndex: 1 },
+  { clerkId: 1, pdfId: 1, segmentIndex: 1 },
   { unique: true },
 );
 PdfSegmentSchema.index({ pdfId: 1, pageNumber: 1 });
