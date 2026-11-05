@@ -30,9 +30,12 @@ PdfSegmentSchema.index(
   { clerkId: 1, pdfId: 1, segmentIndex: 1 },
   { unique: true },
 );
+
 PdfSegmentSchema.index({ pdfId: 1, pageNumber: 1 });
 
 PdfSegmentSchema.index({ pdfId: 1, content: "text" });
+
+PdfSegmentSchema.index({ pdfId: 1, title: 1}, {unique: true});
 
 const PdfSegmentModel =
   models.PdfSegmentModel ||

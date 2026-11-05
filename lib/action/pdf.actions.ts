@@ -217,6 +217,30 @@ export const savePdfSegments = async (
   }
 };
 
+
+export const updateSegment = async ( req: { body: { pdfId: any; segmentIndex: any; newContent: any; }; }, 
+  res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { error?: string; success?: boolean; }): any; new(): any; }; }; }
+) => {
+  const { pdfId, segmentIndex, newContent } = req.body;
+  const { userId } = await auth(); // getting this auth
+
+  const result = await PdfModel.updateOne({
+    clerkId: userId, // preventing from unauthorized access
+    pdfId: pdfId,
+    segmentIndex: segmentIndex
+  },
+  {
+    $set: { content: newContent }
+  }
+)
+
+if(result.matchedCount === 0){
+  return res.status(404).json({error: "Segment not found or unauthorized."});
+}
+
+return res.status(200).json({success: true});
+}
+
 export const createBlobFile = async (pdfId: string) => {
   try {
     await connectToDatabase();
