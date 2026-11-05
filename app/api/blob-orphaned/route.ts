@@ -37,6 +37,7 @@ export async function DELETE(request: Request) {
     }
 
     await del(urlOrPathname);
+    return NextResponse.json({success: true});
   } catch (innerErr) {
     console.error("Error deleting orphaned blob", innerErr);
 
